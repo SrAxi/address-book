@@ -1,0 +1,29 @@
+header {
+  min-height: 6.25rem;
+
+  a.navbar-brand {
+    height: 2.5rem;
+    margin-bottom: .5rem;
+
+    & img {
+      max-height: 100%;
+      vertical-align: middle;
+      margin-right: .6rem;
+      margin-bottom: .5rem;
+    }
+  }
+
+  .navbar-dark .navbar-nav .nav-link {
+    color: rgb(255, 255, 255);
+
+    &.active {
+      text-decoration: underline;
+    }
+
+    &:hover {
+      color: rgba(255, 255, 255, 0.5);
+    }
+  }
+}
+
+

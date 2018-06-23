@@ -1,0 +1,34 @@
+<!-- Page Content -->
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12 table-responsive text-center">
+      <h2>Your contact list</h2>
+      <table class="table table-hover table-bordered" *ngIf="contactList.length > 0; else noContacts">
+        <thead>
+        <tr>
+          <th scope="col">First Name</th>
+          <th scope="col">Last Name</th>
+          <th scope="col">Email</th>
+          <th scope="col">Country</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let contact of contactList">
+          <td>{{ contact.firstName }}</td>
+          <td>{{ contact.lastName}}</td>
+          <td>{{ contact.email }}</td>
+          <td>
+            <span class="flag-icon" [ngClass]="['flag-icon-' + contact.country.code.toLowerCase()]"></span>
+            {{ contact.country.name }}
+          </td>
+        </tr>
+        </tbody>
+      </table>
+      <ng-template #noContacts>
+        <h3>You currently don't have any contacts available!</h3>
+        <p>Please, go to <a routerLink="/contactManagement">Manage Contacts</a> in order to add new contacts to your
+          Address Book!</p>
+      </ng-template>
+    </div>
+  </div>
+</div>

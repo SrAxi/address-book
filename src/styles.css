@@ -1,1 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
+
+/*  Resetting some basic layout styles  */
+body {
+  padding-top: 54px;
+}
+
+@media (min-width: 992px) {
+  body {
+    padding-top: 56px;
+  }
+}

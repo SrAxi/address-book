@@ -1,3 +1,2 @@
-<p>
-  alert works!
-</p>
+<ngb-alert [dismissible]="false" *ngIf="message" class="text-center" [type]="message.type">{{ message.text }}
+</ngb-alert>

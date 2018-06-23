@@ -1,0 +1,23 @@
+@mixin center() {
+  width: 100%;
+  margin: 0 auto;
+}
+
+form {
+  @include center();
+
+  & button.disabled:hover {
+    cursor: not-allowed;
+  }
+}
+
+div.contact-selector {
+  @include center();
+}
+
+hr {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  border: 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}

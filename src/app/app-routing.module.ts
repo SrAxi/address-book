@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { SassViewComponent } from './sass-view/sass-view.component';
-import { BootstrapViewComponent } from './bootstrap-view/bootstrap-view.component';
-import { MaterialViewComponent } from './material-view/material-view.component';
+import { WelcomeComponent } from './welcome/welcome.component';
+import { ContactListComponent } from './contacts/contact-list/contact-list.component';
+import { ContactManagementComponent } from './contacts/contact-management/contact-management.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/sass', pathMatch: 'full' },
-  { path: 'sass', component: SassViewComponent },
-  { path: 'bootstrap', component: BootstrapViewComponent },
-  { path: 'material', component: MaterialViewComponent }
+  { path: '', redirectTo: '/welcome', pathMatch: 'full' },
+  { path: 'welcome', component: WelcomeComponent },
+  { path: 'contactList', component: ContactListComponent },
+  { path: 'contactManagement', component: ContactManagementComponent }
 ];
 
 @NgModule({

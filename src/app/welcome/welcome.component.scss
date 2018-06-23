@@ -1,0 +1,11 @@
+img {
+  width: 34.2rem;
+  border-radius: 10%
+}
+
+/*  Desktop max-width: 768px  */
+@media only screen and (max-width: 48rem) {
+  img {
+    width: 100%;
+  }
+}
