@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Contact } from '../../shared/models/index';
+import { Contact, Country } from '../../shared/models';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AlertService } from '../../shared/alert/index';
-import { Country } from '../../shared/models/country.model';
+import { AlertService } from '../../shared/alert';
 import { Observable } from 'rxjs/index';
 import { debounceTime, map } from 'rxjs/internal/operators';
 import { ContactService } from '../contact.service';
