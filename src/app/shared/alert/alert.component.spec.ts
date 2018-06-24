@@ -1,6 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AlertComponent } from './alert.component';
+import { AlertService } from './alert.service';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('AlertComponent', () => {
   let component: AlertComponent;
@@ -8,9 +11,14 @@ describe('AlertComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AlertComponent ]
+      imports: [
+        NgbModule.forRoot(),
+        RouterTestingModule
+      ],
+      declarations: [AlertComponent],
+      providers: [AlertService]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
@@ -19,7 +27,7 @@ describe('AlertComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should create AlertComponent', () => {
     expect(component).toBeTruthy();
   });
 });

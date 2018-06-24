@@ -19,7 +19,13 @@ describe('WelcomeComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should create WelcomeComponent', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should render the correct h1 tag', async(() => {
+    fixture.detectChanges();
+    const compiled = fixture.debugElement.nativeElement;
+    expect(compiled.querySelector('h1').textContent).toContain('Welcome!');
+  }));
 });

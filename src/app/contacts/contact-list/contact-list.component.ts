@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { Contact } from '../../shared/models/index';
 import { ContactService } from '../contact.service';
 
@@ -11,7 +10,7 @@ import { ContactService } from '../contact.service';
 export class ContactListComponent implements OnInit {
   contactList: Contact[] = [];
 
-  constructor(private http: HttpClient, private contactService: ContactService) {
+  constructor(private contactService: ContactService) {
   }
 
   ngOnInit() {

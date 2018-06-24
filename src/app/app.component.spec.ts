@@ -1,28 +1,57 @@
-import { async, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
+import { AlertComponent, AlertService } from './shared/alert';
+import { HttpClientModule } from '@angular/common/http';
+import { AppRoutingModule } from './app-routing.module';
+import { ContactManagementModule } from './contacts/contact-management/contact-management.module';
+import { ContactListModule } from './contacts/contact-list/contact-list.module';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { WelcomeModule } from './welcome/welcome.module';
+import { HeaderComponent } from './navigation/header/header.component';
+import { BrowserModule } from '@angular/platform-browser';
+import { NgHttpLoaderModule } from 'ng-http-loader';
+import { APP_BASE_HREF } from '@angular/common';
+import { ContactService } from './contacts/contact.service';
 
 describe('AppComponent', () => {
+  let component: AppComponent;
+  let fixture: ComponentFixture<AppComponent>;
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
-        AppComponent
+        AppComponent,
+        HeaderComponent,
+        AlertComponent,
       ],
+      imports: [
+        BrowserModule,
+        HttpClientModule,
+        NgHttpLoaderModule,
+        NgbModule.forRoot(),
+        AppRoutingModule,
+        WelcomeModule,
+        ContactManagementModule,
+        ContactListModule,
+      ],
+      providers: [
+        AlertService,
+        ContactService,
+        { provide: APP_BASE_HREF, useValue: '/welcome' }
+      ]
     }).compileComponents();
   }));
-  it('should create the app', async(() => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.debugElement.componentInstance;
-    expect(app).toBeTruthy();
-  }));
-  it(`should have as title 'app'`, async(() => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('app');
-  }));
-  it('should render title in a h1 tag', async(() => {
-    const fixture = TestBed.createComponent(AppComponent);
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(AppComponent);
+    component = fixture.componentInstance;
     fixture.detectChanges();
-    const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('h1').textContent).toContain('Welcome to address-book!');
+  });
+
+  it('should create the app', async(() => {
+    expect(component).toBeTruthy();
+  }));
+  it(`should have as 'spinkit' property`, async(() => {
+    expect(component.spinkit).toBeDefined();
   }));
 });
