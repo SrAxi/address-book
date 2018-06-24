@@ -105,7 +105,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
     // call materialize and dematerialize to ensure delay even if an error is thrown
       .pipe(materialize())
-      .pipe(delay(1500))
+      .pipe(delay(1500)) // Let's really simulate a server request with 1.5 seconds
       .pipe(dematerialize());
   }
 }
