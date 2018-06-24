@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { AlertService } from '../../shared/alert/index';
 import { Contact } from '../../shared/models/index';
+import { ContactService } from '../contact.service';
 
 @Component({
   selector: 'app-contact-list',
@@ -11,18 +11,13 @@ import { Contact } from '../../shared/models/index';
 export class ContactListComponent implements OnInit {
   contactList: Contact[] = [];
 
-  constructor(private http: HttpClient, private alertService: AlertService) {
+  constructor(private http: HttpClient, private contactService: ContactService) {
   }
 
   ngOnInit() {
     // Getting the contact list to populate the table
-    this.http.get('/api/contacts').subscribe(
-      (contacts: Contact[]) => {
-        this.contactList = contacts;
-      },
-      error => {
-        console.error(error);
-        this.alertService.error(error.message);
-      });
+    this.contactService.getContacts().subscribe(
+      (contacts: Contact[]) => this.contactList = contacts,
+      error => console.error(error));
   }
 }

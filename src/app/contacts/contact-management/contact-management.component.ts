@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Contact } from '../../shared/models/index';
-import { HttpClient } from '@angular/common/http';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AlertService } from '../../shared/alert/index';
 import { Country } from '../../shared/models/country.model';
 import { Observable } from 'rxjs/index';
 import { debounceTime, map } from 'rxjs/internal/operators';
+import { ContactService } from '../contact.service';
 
 declare const require: any;
 const countries: Country[] = require('country-list')().getData();
@@ -20,21 +20,16 @@ export class ContactManagementComponent implements OnInit {
   newContactForm: FormGroup;
   selectedContact = false;
 
-  constructor(private http: HttpClient,
-              private formBuilder: FormBuilder,
-              private alertService: AlertService) {
+  constructor(private formBuilder: FormBuilder,
+              private alertService: AlertService,
+              private contactService: ContactService) {
   }
 
   ngOnInit() {
-    // Getting the contact list for the typeahead search
-    this.http.get('/api/contacts').subscribe(
-      (contacts: Contact[]) => {
-        this.contactList = contacts;
-      },
-      error => {
-        console.error(error);
-        this.alertService.error(error.message);
-      });
+    // Getting the contact list for the typeAhead search
+    this.contactService.getContacts().subscribe(
+      (contacts: Contact[]) => this.contactList = contacts,
+      error => console.error(error));
 
     // Setting up the form
     this.setupForm();
@@ -66,48 +61,34 @@ export class ContactManagementComponent implements OnInit {
 
   /*  Contact's CRUD operations */
   private addContact(newContact: Contact) {
-    this.http.post('/api/contacts', newContact).subscribe(
-      (contacts: Contact[]) => {
-        this.alertService.success('Contact was added to Address Book successfully!');
-        this.resetForm();
-
-        // Because our 'BE' always returns us an updated version of the Contacts object, we'll update our object here
-        this.contactList = [...contacts];
-      },
+    this.contactService.addContact(newContact).subscribe(
+      (contacts: Contact[]) => this.successHandler(contacts),
       error => {
+        // Just in case this subscription fails. The http error handling is being done in the service
         console.error(error);
-        this.alertService.error(error.error.message, 5500);
       });
   }
 
   private editContact(newContact: Contact) {
-    this.http.patch('/api/contacts', newContact).subscribe(
-      (contacts: Contact[]) => {
-        this.alertService.success('Contact was edited successfully!');
-        this.resetForm();
-
-        // Because our 'BE' always returns us an updated version of the Contacts object, we'll update our object here
-        this.contactList = [...contacts];
-      },
-      error => {
-        console.error(error);
-        this.alertService.error(error.error.message, 5500);
-      });
+    this.contactService.editContact(newContact).subscribe(
+      (contacts: Contact[]) => this.successHandler(contacts),
+      error => console.error(error));
   }
 
   removeContact(newContact: Contact) {
-    this.http.request('delete', '/api/contacts', { body: newContact }).subscribe(
+    this.contactService.removeContact(newContact).subscribe(
       (contacts: Contact[]) => {
-        this.alertService.success('Contact was removed successfully form your Address Book!');
         this.resetForm();
-
-        // Because our 'BE' always returns us an updated version of the Contacts object, we'll update our object here
         this.contactList = [...contacts];
       },
-      error => {
-        console.error(error);
-        this.alertService.error(error.error.message, 5500);
-      });
+      error => console.error(error));
+  }
+
+  private successHandler(contacts: Contact[]) {
+    this.resetForm();
+
+    // Because our 'BE' always returns us an updated version of the Contacts object, we'll update our object here
+    this.contactList = [...contacts];
   }
 
   /* Form handlers and methods */
@@ -138,5 +119,8 @@ export class ContactManagementComponent implements OnInit {
       email: [contact && contact.email || '', [Validators.required, Validators.email]],
       country: [contact && contact.country || '', [Validators.required]]
     });
+    if (contact) {
+      this.newContactForm.markAsDirty();
+    }
   }
 }

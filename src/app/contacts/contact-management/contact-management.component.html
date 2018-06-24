@@ -62,13 +62,16 @@
         </div>
         <div class="form-group">
           <button [disabled]="newContactForm.invalid || selectedContact" class="btn btn-primary mr-2 mb-2"
-                  [ngClass]="{'disabled': newContactForm.invalid}" (click)="onSubmit('add')">Add new contact
+                  [ngClass]="{'disabled': newContactForm.invalid || selectedContact}" (click)="onSubmit('add')">Add new
+            contact
           </button>
           <button [disabled]="newContactForm.invalid || !selectedContact" class="btn btn-success mr-2 mb-2"
-                  [ngClass]="{'disabled': newContactForm.invalid}" (click)="onSubmit('edit')">Edit contact
+                  [ngClass]="{'disabled': newContactForm.invalid  || !selectedContact}" (click)="onSubmit('edit')">Edit
+            contact
           </button>
           <button [disabled]="newContactForm.invalid || !selectedContact" class="btn btn-danger mr-2 mb-2"
-                  [ngClass]="{'disabled': newContactForm.invalid}" (click)="removeContact(newContactForm.value)">Remove
+                  [ngClass]="{'disabled': newContactForm.invalid || !selectedContact}"
+                  (click)="removeContact(newContactForm.value)">Remove
             contact
           </button>
           <button [disabled]="newContactForm.pristine" [ngClass]="{'disabled': newContactForm.pristine}"

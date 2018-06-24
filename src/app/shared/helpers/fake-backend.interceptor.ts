@@ -70,9 +70,6 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
         const newContactList = contacts.filter((contact: Contact) => contact.email !== newContact.email);
 
-        console.log(contacts, 'contacts');
-        console.log(newContactList, 'newContactList');
-
         // Save new contact list
         localStorage.setItem('contacts', JSON.stringify(newContactList));
 
@@ -94,9 +91,6 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
         // Adding the new version of the deleted contact
         newContactList.push(newContact);
-
-        console.log(contacts, 'contacts');
-        console.log(newContactList, 'newContactList');
 
         // Save new contact list
         localStorage.setItem('contacts', JSON.stringify(newContactList));
