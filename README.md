@@ -1,6 +1,9 @@
 # AddressBook
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.8.
+This is an Address Book application where you can Add, Edit and Remove contacts. You'll be able to see them displayed in a table.
+This project uses Angular 6 and Bootstrap 4 as main technology stack.
+
+Check the live demo [here](https://address-book-8c258.firebaseapp.com)!
 
 ## Development server
 
@@ -23,5 +26,7 @@ Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.
 Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
 
 ## Further help
+
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.8.
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
