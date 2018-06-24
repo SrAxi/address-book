@@ -48,7 +48,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
           return contact.email === newContact.email;
         }).length;
         if (duplicateContact) {
-          return throwError({ error: { message: `Contact with email "${newContact.email}" is already in your address book` } });
+          return throwError({ message: `Contact with email "${newContact.email}" is already in your address book` });
         }
 
         // save new contact

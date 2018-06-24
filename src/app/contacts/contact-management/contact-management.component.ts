@@ -88,7 +88,9 @@ export class ContactManagementComponent implements OnInit {
     this.resetForm();
 
     // Because our 'BE' always returns us an updated version of the Contacts object, we'll update our object here
-    this.contactList = [...contacts];
+    if (contacts) {
+      this.contactList = [...contacts];
+    }
   }
 
   /* Form handlers and methods */
